@@ -43,7 +43,6 @@ export const spacing = {
   tiny: 4,
   small: 8,
   medium: 12,
-  mediumer: 16,
   large: 24,
   extraLarge: 48,
   huge: 64,

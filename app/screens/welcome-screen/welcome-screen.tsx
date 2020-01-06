@@ -1,18 +1,14 @@
 import * as React from "react"
 import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
 import { NavigationScreenProps } from "react-navigation"
-import { Text } from "../../components/text"
-import { Button } from "../../components/button"
-import { Screen } from "../../components/screen"
-import { Wallpaper } from "../../components/wallpaper"
-import { Header } from "../../components/header"
+import { Button, Header, Screen, Text, Wallpaper } from "../../components"
 import { color, spacing } from "../../theme"
-import { bowserLogo } from "./"
+const bowserLogo = require("./bowser.png")
 
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
   backgroundColor: color.transparent,
-  paddingHorizontal: spacing.mediumer,
+  paddingHorizontal: spacing[4],
 }
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -20,8 +16,8 @@ const TEXT: TextStyle = {
 }
 const BOLD: TextStyle = { fontWeight: "bold" }
 const HEADER: TextStyle = {
-  paddingTop: spacing.medium,
-  paddingBottom: spacing.mediumer + spacing.tiny,
+  paddingTop: spacing[3],
+  paddingBottom: spacing[4] + spacing[1],
   paddingHorizontal: 0,
 }
 const HEADER_TITLE: TextStyle = {
@@ -51,7 +47,7 @@ const ALMOST: TextStyle = {
 }
 const BOWSER: ImageStyle = {
   alignSelf: "center",
-  marginVertical: spacing.large,
+  marginVertical: spacing[5],
   maxWidth: "100%",
 }
 const CONTENT: TextStyle = {
@@ -59,11 +55,11 @@ const CONTENT: TextStyle = {
   color: "#BAB6C8",
   fontSize: 15,
   lineHeight: 22,
-  marginBottom: spacing.large,
+  marginBottom: spacing[5],
 }
 const CONTINUE: ViewStyle = {
-  paddingVertical: spacing.mediumer,
-  paddingHorizontal: spacing.mediumer,
+  paddingVertical: spacing[4],
+  paddingHorizontal: spacing[4],
   backgroundColor: "#5D2555",
 }
 const CONTINUE_TEXT: TextStyle = {
@@ -74,48 +70,48 @@ const CONTINUE_TEXT: TextStyle = {
 }
 const FOOTER: ViewStyle = { backgroundColor: "#20162D" }
 const FOOTER_CONTENT: ViewStyle = {
-  paddingVertical: spacing.mediumer,
-  paddingHorizontal: spacing.mediumer,
+  paddingVertical: spacing[4],
+  paddingHorizontal: spacing[4],
 }
 
 export interface WelcomeScreenProps extends NavigationScreenProps<{}> {}
 
-export class WelcomeScreen extends React.Component<WelcomeScreenProps, {}> {
-  nextScreen = () => this.props.navigation.navigate("demo")
+export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props => {
+  const nextScreen = React.useMemo(() => () => props.navigation.navigate("demo"), [
+    props.navigation,
+  ])
 
-  render() {
-    return (
-      <View style={FULL}>
-        <Wallpaper />
-        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-          <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
-          <Text style={TITLE_WRAPPER}>
-            <Text style={TITLE} text="Your new app, " />
-            <Text style={ALMOST} text="almost" />
-            <Text style={TITLE} text="!" />
-          </Text>
-          <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
-          <Image source={bowserLogo} style={BOWSER} />
-          <Text style={CONTENT}>
-            This probably isn't what your app is going to look like. Unless your designer handed you
-            this screen and, in that case, congrats! You're ready to ship.
-          </Text>
-          <Text style={CONTENT}>
-            For everyone else, this is where you'll see a live preview of your fully functioning app
-            using Ignite.
-          </Text>
-        </Screen>
-        <SafeAreaView style={FOOTER}>
-          <View style={FOOTER_CONTENT}>
-            <Button
-              style={CONTINUE}
-              textStyle={CONTINUE_TEXT}
-              tx="welcomeScreen.continue"
-              onPress={this.nextScreen}
-            />
-          </View>
-        </SafeAreaView>
-      </View>
-    )
-  }
+  return (
+    <View style={FULL}>
+      <Wallpaper />
+      <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
+        <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
+        <Text style={TITLE_WRAPPER}>
+          <Text style={TITLE} text="Your new app, " />
+          <Text style={ALMOST} text="almost" />
+          <Text style={TITLE} text="!" />
+        </Text>
+        <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
+        <Image source={bowserLogo} style={BOWSER} />
+        <Text style={CONTENT}>
+          This probably isn't what your app is going to look like. Unless your designer handed you
+          this screen and, in that case, congrats! You're ready to ship.
+        </Text>
+        <Text style={CONTENT}>
+          For everyone else, this is where you'll see a live preview of your fully functioning app
+          using Ignite.
+        </Text>
+      </Screen>
+      <SafeAreaView style={FOOTER}>
+        <View style={FOOTER_CONTENT}>
+          <Button
+            style={CONTINUE}
+            textStyle={CONTINUE_TEXT}
+            tx="welcomeScreen.continue"
+            onPress={nextScreen}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
+  )
 }

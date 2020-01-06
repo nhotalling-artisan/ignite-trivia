@@ -3,7 +3,7 @@ import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
 import { QuestionSnapshot } from "../../models/question"
-import uuid from "react-native-uuid"
+import uuid from "uuid"
 import { decodeHTMLEntities } from "../../utils/html-decode"
 
 const API_PAGE_SIZE = 10

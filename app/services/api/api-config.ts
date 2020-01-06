@@ -1,4 +1,4 @@
-import * as env from "../../environment-variables"
+import { API_URL } from "react-native-dotenv" // imports from .env file
 
 /**
  * The options used to configure the API.
@@ -19,6 +19,6 @@ export interface ApiConfig {
  * The default configuration for the app.
  */
 export const DEFAULT_API_CONFIG: ApiConfig = {
-  url: env.API || "https://opentdb.com/api.php",
+  url: API_URL,
   timeout: 10000,
 }

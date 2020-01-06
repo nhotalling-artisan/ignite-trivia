@@ -1,18 +1,22 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import shuffle from "lodash.shuffle"
+
+// Created by running 'ignite generate model question'
+// This is the MobX State Tree (MST) model for question.
+
 /**
  * A trivia questions with several answer choices
  */
 export const QuestionModel = types
   .model("Question")
   .props({
-    id: types.identifier,
-    category: types.maybe(types.string),
+    id: types.identifier, // MST's version of a primary key
+    category: types.maybe(types.string), // types.maybe means values can be undefined
     type: types.enumeration(["multiple", "boolean"]),
     difficulty: types.enumeration(["easy", "medium", "hard"]),
     question: types.maybe(types.string),
     correctAnswer: types.maybe(types.string),
-    incorrectAnswers: types.optional(types.array(types.string), []),
+    incorrectAnswers: types.optional(types.array(types.string), []), // types.optional will have a default value. In this case, it's [].
     guess: types.optional(types.string, ""),
   })
   .views(self => ({
